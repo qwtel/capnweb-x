@@ -23,6 +23,8 @@ export interface Codec {
   typeForRpc(value: unknown): TypeForRpc;
 }
 
+const AsyncFunction = (async function () {}).constructor;
+
 export class JsonCodec implements Codec {
   readonly name: "json" = "json";
 
@@ -78,6 +80,7 @@ export class JsonCodec implements Codec {
         return "object";
 
       case Function.prototype:
+      case AsyncFunction.prototype:
         return "function";
 
       case Array.prototype:
