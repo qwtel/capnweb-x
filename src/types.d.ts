@@ -114,7 +114,10 @@ export type Stubify<T> =
 // `Stub` depends on `Provider`, which depends on `Unstubify`, which would depend on `Stub`.
 // prettier-ignore
 type UnstubifyInner<T> =
-  T extends StubBase<infer V> ? (T | V)  // can provide either stub or local RpcTarget
+  T extends StubBase<infer V> 
+    ? V extends (...args: infer P) => infer R 
+      ? (T | ((...args: P) => R | Promise<R>))  // can provide stub or sync/async function
+      : (T | V)  // can provide either stub or local RpcTarget
   : T extends Map<infer K, infer V> ? Map<Unstubify<K>, Unstubify<V>>
   : T extends Set<infer V> ? Set<Unstubify<V>>
   : T extends [] ? []
