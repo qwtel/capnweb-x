@@ -38,6 +38,7 @@
     "@changesets/cli": "^2.29.8",
     "@cloudflare/vitest-pool-workers": "^0.10.15",
     "@cloudflare/workers-types": "^4.20251216.0",
+    "@types/chrome": "^0.1.32",
     "@types/ws": "^8.18.1",
     "@vitest/browser": "^3.2.4",
     "pkg-pr-new": "^0.0.60",
